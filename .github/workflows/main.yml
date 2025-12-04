@@ -1,0 +1,20 @@
+name: 直列・並列実行のテスト
+on: workflow_dispatch
+jobs:
+  Test-A:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Execute Test A"
+  Test-B:
+    needs: Test-A
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Execute Test B"
+  Test-C:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Execute Test C"
+  Test-D:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Execute Test D"
