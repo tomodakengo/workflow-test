@@ -1,7 +1,12 @@
 name: 直列・並列実行のテスト
 on: workflow_dispatch
 jobs:
+  Checkout:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Checkout Code"
   Test-A:
+    needs: Checkout
     runs-on: ubuntu-latest
     steps:
     - run: echo "Execute Test A"
@@ -11,10 +16,20 @@ jobs:
     steps:
     - run: echo "Execute Test B"
   Test-C:
+    needs: Checkout
     runs-on: ubuntu-latest
     steps:
     - run: echo "Execute Test C"
   Test-D:
+    needs: Checkout
     runs-on: ubuntu-latest
     steps:
     - run: echo "Execute Test D"
+  MergeReport:
+    needs: 
+      - Test-B
+      - Test-C
+      - Test-D
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Report Merged!"
